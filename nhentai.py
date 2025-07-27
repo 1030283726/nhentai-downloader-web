@@ -21,20 +21,20 @@ def run_nhentai_command(args):
         output = result.stdout + result.stderr
         latest_log_output = output  # ⬅️ 儲存最近 log
 
-        if "main: All done." in output:
-            flash("✅ 下載成功", "success")
+        if "main: 🍻 All done." in output:
+            flash("✅ Dowload success", "success")
         elif "cmd_parser: User-Agent saved" in output:
-            flash("✅ User-Agent 設定成功", "success")
+            flash("✅ User-Agent saved", "success")
         elif "cmd_parser: Cookie saved" in output:
-            flash("✅ Cookie 設定成功", "success")
+            flash("✅ Cookie saved", "success")
         elif result.returncode == 0:
-            flash("⚠️ 執行完畢，但未偵測到成功訊號", "error")
+            flash("⚠️ Error, completed without success", "error")
         else:
-            flash("❌ 命令執行失敗", "error")
+            flash("❌ Fail", "error")
 
     except Exception as e:
         latest_log_output = str(e)
-        flash(f"❌ 發生例外錯誤：{e}", "error")
+        flash(f"❌ Unexpected error：{e}", "error")
 
 
 @app.route('/')
@@ -56,14 +56,14 @@ def verify_password():
         resp.set_cookie("nhentai_auth", "ok", max_age=60*60*24*30)  # 有效期30天
         return resp
     else:
-        flash("密碼錯誤", "error")
+        flash("Wrong password", "error")
         return redirect(url_for("index"))
 
 @app.route('/ua', methods=['POST'])
 def ua():
     ua = request.form.get('ua', '').strip()
     if not ua or len(ua) > 200:
-        flash("User-Agent 無效 ❌", "error")
+        flash("User-Agent error ❌", "error")
         return redirect(url_for('index'))
     run_nhentai_command(["nhentai", "--useragent", ua])
     return redirect(url_for('index'))
@@ -72,7 +72,7 @@ def ua():
 def cookies():
     ck = request.form.get('ck', '').strip()
     if not ck or len(ck) > 1000:
-        flash("Cookie 無效 ❌", "error")
+        flash("Cookie error ❌", "error")
         return redirect(url_for('index'))
     run_nhentai_command(["nhentai", "--cookie", ck])
     return redirect(url_for('index'))
@@ -81,7 +81,7 @@ def cookies():
 def download():
     gallery_id = request.form.get('id', '').strip()
     if not gallery_id.isdigit():
-        flash("ID 必須是數字 ❌", "error")
+        flash("ID Must be 6 digit ❌", "error")
         return redirect(url_for('index'))
 
     command = [
