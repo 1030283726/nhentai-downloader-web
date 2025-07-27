@@ -31,7 +31,8 @@ pip install -r requirements.txt
 python nhentai.py
 ```
 Visit http://localhost:61234
----
+
+
 
 ## Method 2: Dockerhub
 ```bash
