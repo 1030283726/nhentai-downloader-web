@@ -57,6 +57,12 @@ docker run -d -p 61234:61234 \
   nhentai-downloader-web
 ```
 
+---
+## ENV
 
+| Variable             | Description                                                                 | Default    | Example                      |
+|----------------------|-----------------------------------------------------------------------------|------------|------------------------------|
+| `NHENTAI_PASSWORD`   | Password required to access the web UI. Stored in cookie for 30 days.       | `admin`    | `mystrongpassword`           |
+| `DOWNLOAD_PATH`      | Directory where downloaded doujins will be saved inside the container.      | `/nhentai` | `/download`                  |
 
 
