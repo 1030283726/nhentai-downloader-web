@@ -39,7 +39,7 @@ Visit http://localhost:61234
 docker run -d -p 61234:61234 \
   -e NHENTAI_PASSWORD=yourpassword \
   -v /your-path:/nhentai \
-  1030283726//nhentai-downloader-web
+  1030283726/nhentai-downloader-web
 ```
 
 
